@@ -34,9 +34,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.CRServo;
 
 /*
  * This file contains an example of a Linear "OpMode".
@@ -67,7 +64,7 @@ import com.qualcomm.robotcore.hardware.CRServo;
  */
 
 @TeleOp(name="Mecha", group="Shame")
-public class MechanumDrive extends LinearOpMode {
+public class MechanumOwenTest extends LinearOpMode {
 
     // Declare OpMode members for each of the 4 motors.
     private ElapsedTime runtime = new ElapsedTime();
@@ -75,8 +72,6 @@ public class MechanumDrive extends LinearOpMode {
     private DcMotor leftBackDrive = null;
     private DcMotor rightFrontDrive = null;
     private DcMotor rightBackDrive = null;
-    CRServo Wheel1;
-    CRServo Wheel2;
 
     @Override
     public void runOpMode() {
@@ -87,10 +82,6 @@ public class MechanumDrive extends LinearOpMode {
         leftBackDrive  = hardwareMap.get(DcMotor.class, "LBMotor");
         rightFrontDrive = hardwareMap.get(DcMotor.class, "RFMotor");
         rightBackDrive = hardwareMap.get(DcMotor.class, "RBMotor");
-        Wheel1 = hardwareMap.get(CRServo.class, "Wheel1");
-        Wheel1.resetDeviceConfigurationForOpMode();
-        Wheel2 = hardwareMap.get(CRServo.class, "Wheel2");
-        Wheel2.resetDeviceConfigurationForOpMode();
 
         // ########################################################################################
         // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
@@ -141,18 +132,6 @@ public class MechanumDrive extends LinearOpMode {
                 rightFrontPower /= max;
                 leftBackPower   /= max;
                 rightBackPower  /= max;
-            }
-            while (gamepad1.dpad_up) {
-                Wheel1.setPower(0.6);
-                Wheel2.setPower(-0.8);
-            }
-            while (gamepad1.dpad_down) {
-                Wheel1.setPower(-0.6);
-                Wheel2.setPower(0.8);
-            }
-            while (gamepad1.dpad_left){
-                Wheel1.setPower(0.0);
-                Wheel2.setPower(0.0);
             }
 
 
