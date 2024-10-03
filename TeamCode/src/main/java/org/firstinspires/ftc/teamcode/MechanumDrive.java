@@ -142,18 +142,28 @@ public class MechanumDrive extends LinearOpMode {
                 leftBackPower   /= max;
                 rightBackPower  /= max;
             }
-            while (gamepad1.dpad_up) {
-                Wheel1.setPower(0.6);
-                Wheel2.setPower(-0.8);
-            }
-            while (gamepad1.dpad_down) {
-                Wheel1.setPower(-0.6);
+// Wheel 1 is left servo motor
+
+            if (gamepad2.dpad_up) {
+                Wheel1.setPower(-1);
                 Wheel2.setPower(0.8);
+            } else {
+                Wheel1.setPower(0);
+                Wheel2.setPower(0);
             }
-            while (gamepad1.dpad_left){
-                Wheel1.setPower(0.0);
-                Wheel2.setPower(0.0);
-            }
+
+
+        if (gamepad2.dpad_down) {
+            Wheel1.setPower(1);
+            Wheel2.setPower(-0.8);
+        } else {
+            Wheel1.setPower(0);
+            Wheel2.setPower(0);
+        }
+            //while (gamepad1.dpad_left){
+               // Wheel1.setPower(0.0);
+               // Wheel2.setPower(0.0);
+          //  }
 
 
             // Send calculated power to wheels
