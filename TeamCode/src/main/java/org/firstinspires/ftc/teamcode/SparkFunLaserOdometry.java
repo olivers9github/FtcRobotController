@@ -6,6 +6,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.sparkfun.SparkFunOTOS;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -23,7 +24,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
  *
  * See the sensor's product page: https://www.sparkfun.com/products/24904
  */
-@TeleOp(name = "Sensor: SparkFun OTOS", group = "Sensor")
+@Autonomous(name = "Sensor: SparkFun OTOS", group = "Sensor")
 public class SparkFunLaserOdometry extends LinearOpMode {
     // Create an instance of the sensor
     SparkFunOTOS myOtos;
@@ -46,19 +47,16 @@ public class SparkFunLaserOdometry extends LinearOpMode {
             SparkFunOTOS.Pose2D pos = myOtos.getPosition();
 
             // Reset the tracking if the user requests it
-            if (gamepad1.y) {
-                myOtos.resetTracking();
-            }
+
+                //myOtos.resetTracking();
+
 
             // Re-calibrate the IMU if the user requests it
-            if (gamepad1.x) {
+
                 myOtos.calibrateImu();
-            }
 
             // Inform user of available controls
-            telemetry.addLine("Press Y (triangle) on Gamepad to reset tracking");
-            telemetry.addLine("Press X (square) on Gamepad to calibrate the IMU");
-            telemetry.addLine();
+
 
             // Log the position to the telemetry
             telemetry.addData("X coordinate", pos.x);
