@@ -5,8 +5,15 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
+import com.qualcomm.hardware.sparkfun.SparkFunOTOS;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
+@Autonomous(name = "OTOS1", group = "TestClaw1")
 public class OTOS1 extends LinearOpMode {
 
     // Declare OpMode members for each of the 4 motors.
@@ -25,10 +32,10 @@ public class OTOS1 extends LinearOpMode {
 
         // Initialize the hardware variables. Note that the strings used here must correspond
         // to the names assigned during the robot configuration step on the DS or RC devices.
-        leftFrontDrive  = hardwareMap.get(DcMotor.class, "drive_leftFront");
-        leftBackDrive  = hardwareMap.get(DcMotor.class, "drive_leftBack");
-        rightFrontDrive = hardwareMap.get(DcMotor.class, "drive_rightFront");
-        rightBackDrive = hardwareMap.get(DcMotor.class, "drive_rightBack");
+        leftFrontDrive  = hardwareMap.get(DcMotor.class, "LFMotor");
+        leftBackDrive  = hardwareMap.get(DcMotor.class, "LBMotor");
+        rightFrontDrive = hardwareMap.get(DcMotor.class, "RFMotor");
+        rightBackDrive = hardwareMap.get(DcMotor.class, "RBMotor");
 
         // ########################################################################################
         // !!!            IMPORTANT Drive Information. Test your motor directions.            !!!!!
@@ -91,6 +98,17 @@ public class OTOS1 extends LinearOpMode {
                 // Get the latest position, which includes the x and y coordinates, plus the
                 // heading angle
                 pos = myOtos.getPosition();
+                while (pos.x < 60){
+                    leftFrontDrive.setPower(1);
+                    rightFrontDrive.setPower(1);
+                    leftBackDrive.setPower(1);
+                    rightBackDrive.setPower(1);
+                    pos = myOtos.getPosition();
+                }
+                while (pos.h < 90){
+                    rightFrontDrive.setPower(-1);
+                    rightBackDrive.setPower(-1);
+                }
 
                 // Show the elapsed game time.
                 telemetry.addData("Status", "Run Time: " + runtime.toString());
@@ -113,9 +131,9 @@ public class OTOS1 extends LinearOpMode {
         // stored in the sensor, it's part of the library, so you need to set at the
         // start of all your programs.
         // myOtos.setLinearUnit(SparkFunOTOS.LinearUnit.METERS);
-        myOtos.setLinearUnit(SparkFunOTOS.LinearUnit.INCHES);
-        // myOtos.setAngularUnit(SparkFunOTOS.AngularUnit.RADIANS);
-        myOtos.setAngularUnit(SparkFunOTOS.AngularUnit.DEGREES);
+        myOtos.setLinearUnit(DistanceUnit.INCH);
+        //myOtos.setAngularUnit(SparkFunOTOS.AngularUnit.RADIANS);
+        myOtos.setAngularUnit(AngleUnit.DEGREES);
 
         // Assuming you've mounted your sensor to a robot and it's not centered,
         // you can specify the offset for the sensor relative to the center of the
@@ -221,5 +239,4 @@ public class OTOS1 extends LinearOpMode {
         rightBackDrive.setPower(rightBackPower);
         sleep(10);
     }
-}{
 }
