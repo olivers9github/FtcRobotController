@@ -98,14 +98,14 @@ public class OTOS1 extends LinearOpMode {
                 // Get the latest position, which includes the x and y coordinates, plus the
                 // heading angle
                 pos = myOtos.getPosition();
-                while (pos.x < 60){
+                if (pos.y < 60){
                     leftFrontDrive.setPower(1);
                     rightFrontDrive.setPower(1);
                     leftBackDrive.setPower(1);
                     rightBackDrive.setPower(1);
                     pos = myOtos.getPosition();
                 }
-                while (pos.h < 90){
+                else-if (pos.h < 90){
                     rightFrontDrive.setPower(-1);
                     rightBackDrive.setPower(-1);
                 }

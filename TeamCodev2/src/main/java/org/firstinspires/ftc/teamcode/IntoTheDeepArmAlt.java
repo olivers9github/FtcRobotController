@@ -59,6 +59,7 @@ public class IntoTheDeepArmAlt extends LinearOpMode {
             double ArmMotor = 0;
             telemetry.addData("Arm Position", ArmMotor);
             telemetry.update();
+
         }
     }
 }
